@@ -68,18 +68,6 @@ FastAPI automatically generates interactive API documentation:
 - Swagger UI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - ReDoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
-## Development
-
-- Use `flake8` for linting:
-  ```bash
-  flake8
-  ```
-
-- Run tests:
-  ```bash
-  pytest
-  ```
-
 ## Project Structure
 
 ```
@@ -89,6 +77,7 @@ project/
 │   ├── main.py
 │   ├── api/
 │   │   ├── __init__.py
+│   │   ├── models.py
 │   │   ├── routes.py
 │   ├── services/
 │   │   ├── __init__.py
@@ -99,8 +88,6 @@ project/
 ├── templates/
 │   ├── index.html
 ├── static/
-├── tests/
-│   ├── test_placeholder.py
 ├── requirements.txt
 ├── README.md
 ```
