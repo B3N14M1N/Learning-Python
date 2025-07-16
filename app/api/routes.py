@@ -1,22 +1,25 @@
 from fastapi import APIRouter, HTTPException
 from app.services.math_operations import calculate_power, calculate_fibonacci, calculate_factorial
-from app.api.models import PowerRequest, FibonacciRequest, FactorialRequest
+from app.api.models import PowerRequest, FibonacciRequest, FactorialRequest, ResponseModel
 
 router = APIRouter()
 
 @router.get("/pow")
 async def power(base: float, exponent: float):
     try:
-        result = await calculate_power(base, exponent)
-        return {"base": base, "exponent": exponent, "result": result}
+        request = PowerRequest(base=base, exponent=exponent)
+        result = await calculate_power(request)
+        return {"result": result.result}  # Ensure the response has a 'result' field
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/fibonacci")
 async def fibonacci(n: int):
     try:
-        result = await calculate_fibonacci(n)
-        return {"n": n, "result": result}
+        result = await calculate_fibonacci(FibonacciRequest(n=n))
+        return {"result": result.result}  # Ensure the response has a 'result' field
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -25,8 +28,8 @@ async def fibonacci(n: int):
 @router.get("/factorial")
 async def factorial(n: int):
     try:
-        result = await calculate_factorial(n)
-        return {"n": n, "result": result}
+        result = await calculate_factorial(FactorialRequest(n=n))
+        return {"result": result.result}  # Ensure the response has a 'result' field
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:

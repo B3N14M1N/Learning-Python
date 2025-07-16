@@ -9,3 +9,6 @@ class FibonacciRequest(BaseModel):
 
 class FactorialRequest(BaseModel):
     n: int
+
+class ResponseModel(BaseModel):
+    result: float

@@ -1,39 +1,68 @@
+from asyncio import open_connection
 from pathlib import Path
 import sqlite3
-from contextlib import contextmanager
 from dotenv import load_dotenv
 import os
+import aiosqlite
 
-# Load environment variables from .env file
-load_dotenv()
+class DatabaseManager:
+    def __init__(self, db_path: Path = None):
+        if db_path is None:
+            # Load environment variables from .env file
+            load_dotenv()
 
-# Get the database path from the .env file
-DATABASE_PATH = Path(os.getenv("DATABASE_PATH", "app/db/cache.db"))
+            # Get the database path from the .env file
+            DATABASE_PATH = Path(os.getenv("DATABASE_PATH", "app/db/cache.db"))
 
-# Construct the absolute path based on the project's root directory
-BASE_DIR = Path(__file__).resolve().parents[2]
-DATABASE_PATH = BASE_DIR / DATABASE_PATH
+            # Construct the absolute path based on the project's root directory
+            BASE_DIR = Path(__file__).resolve().parents[2]
 
-@contextmanager
-def get_db_connection():
-    connection = sqlite3.connect(str(DATABASE_PATH))
-    try:
-        yield connection
-    finally:
-        connection.close()
+            db_path = BASE_DIR / DATABASE_PATH
 
-def initialize_database():
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("""
-        CREATE TABLE IF NOT EXISTS cache (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            operation TEXT NOT NULL,
-            input TEXT NOT NULL,
-            result TEXT NOT NULL
-        )
-        """)
-        conn.commit()
+        self.db_path = db_path
 
-# Initialize the database on module load
-initialize_database()
+    async def get_connection(self):
+        self.conn = await aiosqlite.connect(str(self.db_path))
+        return self.conn
+    
+    async def initialize_database(self):
+        conn = await self.get_connection()
+        try:
+            await conn.execute("""
+            CREATE TABLE IF NOT EXISTS cache (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                operation TEXT NOT NULL,
+                input TEXT NOT NULL,
+                result TEXT NOT NULL
+            )
+            """)
+            await conn.commit()
+        finally:
+            await conn.close()
+            
+    async def cache_result(self, operation: str, input_data: str, result: str):
+        conn = await self.get_connection()
+        try:
+            await conn.execute(
+                "INSERT INTO cache (operation, input, result) VALUES (?, ?, ?)",
+                (operation, input_data, result),
+            )
+            await conn.commit()
+        finally:
+            await conn.close()
+
+    async def get_cached_result(self, operation: str, input_data: str):
+        conn = await self.get_connection()
+        try:
+            cursor = await conn.execute(
+                "SELECT result FROM cache WHERE operation = ? AND input = ?",
+                (operation, input_data),
+            )
+            row = await cursor.fetchone()
+            return row[0] if row else None
+        finally:
+            await conn.close()
+
+# Usage
+db_manager = DatabaseManager()
+db_manager.initialize_database()
