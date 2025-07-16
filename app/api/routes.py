@@ -4,29 +4,29 @@ from app.api.models import PowerRequest, FibonacciRequest, FactorialRequest
 
 router = APIRouter()
 
-@router.post("/pow")
-async def power(request: PowerRequest):
+@router.get("/pow")
+async def power(base: float, exponent: float):
     try:
-        result = await calculate_power(request.base, request.exponent)
-        return {"base": request.base, "exponent": request.exponent, "result": result}
+        result = await calculate_power(base, exponent)
+        return {"base": base, "exponent": exponent, "result": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/fibonacci")
-async def fibonacci(request: FibonacciRequest):
+@router.get("/fibonacci")
+async def fibonacci(n: int):
     try:
-        result = await calculate_fibonacci(request.n)
-        return {"n": request.n, "result": result}
+        result = await calculate_fibonacci(n)
+        return {"n": n, "result": result}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/factorial")
-async def factorial(request: FactorialRequest):
+@router.get("/factorial")
+async def factorial(n: int):
     try:
-        result = await calculate_factorial(request.n)
-        return {"n": request.n, "result": result}
+        result = await calculate_factorial(n)
+        return {"n": n, "result": result}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:

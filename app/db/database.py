@@ -1,11 +1,22 @@
+from pathlib import Path
 import sqlite3
 from contextlib import contextmanager
+from dotenv import load_dotenv
+import os
 
-DATABASE_PATH = "c:\\Applications\\Homework\\Python\\Project\\app\\db\\cache.db"
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the database path from the .env file
+DATABASE_PATH = Path(os.getenv("DATABASE_PATH", "app/db/cache.db"))
+
+# Construct the absolute path based on the project's root directory
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATABASE_PATH = BASE_DIR / DATABASE_PATH
 
 @contextmanager
 def get_db_connection():
-    connection = sqlite3.connect(DATABASE_PATH)
+    connection = sqlite3.connect(str(DATABASE_PATH))
     try:
         yield connection
     finally:
