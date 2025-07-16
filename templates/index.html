@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Service</title>
+</head>
+<body>
+    <h1>Math Service</h1>
+    <form action="/pow" method="get">
+        <h3>Power Function</h3>
+        Base: <input type="number" name="base" step="any" required>
+        Exponent: <input type="number" name="exponent" step="any" required>
+        <button type="submit">Calculate</button>
+    </form>
+    <form action="/fibonacci" method="get">
+        <h3>Fibonacci</h3>
+        N: <input type="number" name="n" required>
+        <button type="submit">Calculate</button>
+    </form>
+    <form action="/factorial" method="get">
+        <h3>Factorial</h3>
+        N: <input type="number" name="n" required>
+        <button type="submit">Calculate</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById('math-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const operation = document.getElementById('operation').value;
+            const input1 = document.getElementById('input1').value;
+            const input2 = document.getElementById('input2').value;
+
+            let url = `/${operation}?`;
+            if (operation === 'pow') {
+                url += `base=${input1}&exponent=${input2}`;
+            } else {
+                url += `n=${input1}`;
+            }
+
+            const response = await fetch(url);
+            const data = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(data);
+        });
+    </script>
+</body>
+</html>
