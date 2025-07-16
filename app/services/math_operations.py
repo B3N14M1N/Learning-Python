@@ -1,21 +1,27 @@
 import math
 import asyncio
+import time
 from app.db.database import db_manager
 from app.api.models import PowerRequest, FibonacciRequest, FactorialRequest, ResponseModel
 
 async def calculate_power(request: PowerRequest) -> ResponseModel:
+    start_time = time.time()
     cached = await db_manager.get_cached_result("power", f"{request.base},{request.exponent}")
     if cached:
-        return ResponseModel(result=float(cached))
+        execution_time = (time.time() - start_time) * 1000
+        return ResponseModel(result=float(cached), execution_time=execution_time, cached=True)
 
     result = math.pow(request.base, request.exponent)
     await db_manager.cache_result("power", f"{request.base},{request.exponent}", str(result))
-    return ResponseModel(result=result)
+    execution_time = (time.time() - start_time) * 1000
+    return ResponseModel(result=result, execution_time=execution_time, cached=False)
 
 async def calculate_fibonacci(request: FibonacciRequest) -> ResponseModel:
+    start_time = time.time()
     cached = await db_manager.get_cached_result("fibonacci", str(request.n))
     if cached:
-        return ResponseModel(result=int(cached))
+        execution_time = (time.time() - start_time) * 1000
+        return ResponseModel(result=int(cached), execution_time=execution_time, cached=True)
 
     if request.n <= 0:
         result = 0
@@ -29,12 +35,15 @@ async def calculate_fibonacci(request: FibonacciRequest) -> ResponseModel:
         result = b
 
     await db_manager.cache_result("fibonacci", str(request.n), str(result))
-    return ResponseModel(result=result)
+    execution_time = (time.time() - start_time) * 1000
+    return ResponseModel(result=result, execution_time=execution_time, cached=False)
 
 async def calculate_factorial(request: FactorialRequest) -> ResponseModel:
+    start_time = time.time()
     cached = await db_manager.get_cached_result("factorial", str(request.n))
     if cached:
-        return ResponseModel(result=int(cached))
+        execution_time = (time.time() - start_time) * 1000
+        return ResponseModel(result=int(cached), execution_time=execution_time, cached=True)
 
     if request.n < 0:
         raise ValueError("Factorial is not defined for negative numbers")
@@ -44,4 +53,5 @@ async def calculate_factorial(request: FactorialRequest) -> ResponseModel:
         await asyncio.sleep(0)  # Yield control to avoid blocking
 
     await db_manager.cache_result("factorial", str(request.n), str(result))
-    return ResponseModel(result=result)
+    execution_time = (time.time() - start_time) * 1000
+    return ResponseModel(result=result, execution_time=execution_time, cached=False)

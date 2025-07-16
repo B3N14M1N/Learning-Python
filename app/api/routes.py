@@ -9,7 +9,11 @@ async def power(base: float, exponent: float):
     try:
         request = PowerRequest(base=base, exponent=exponent)
         result = await calculate_power(request)
-        return {"result": result.result}  # Ensure the response has a 'result' field
+        return {
+            "result": result.result,
+            "execution_time": result.execution_time,
+            "cached": result.cached
+        }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -19,7 +23,11 @@ async def power(base: float, exponent: float):
 async def fibonacci(n: int):
     try:
         result = await calculate_fibonacci(FibonacciRequest(n=n))
-        return {"result": result.result}  # Ensure the response has a 'result' field
+        return {
+            "result": result.result,
+            "execution_time": result.execution_time,
+            "cached": result.cached
+        }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -29,7 +37,11 @@ async def fibonacci(n: int):
 async def factorial(n: int):
     try:
         result = await calculate_factorial(FactorialRequest(n=n))
-        return {"result": result.result}  # Ensure the response has a 'result' field
+        return {
+            "result": result.result,
+            "execution_time": result.execution_time,
+            "cached": result.cached
+        }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:

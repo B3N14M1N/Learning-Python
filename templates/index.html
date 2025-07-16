@@ -1,38 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Service</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
+
 <body>
     <h1>Math Service</h1>
-    <div class="operation-card">
-        <form id="pow-form">
-            <h3>Power Function</h3>
-            Base: <input type="number" name="base" step="any" required>
-            Exponent: <input type="number" name="exponent" step="any" required>
-            <button type="submit">Calculate</button>
-        </form>
-        <div id="pow-result" class="result-card"></div>
-    </div>
-    <div class="operation-card">
-        <form id="fibonacci-form">
-            <h3>Fibonacci</h3>
-            N: <input type="number" name="n" required>
-            <button type="submit">Calculate</button>
-        </form>
-        <div id="fibonacci-result" class="result-card"></div>
-    </div>
-    <div class="operation-card">
-        <form id="factorial-form">
-            <h3>Factorial</h3>
-            N: <input type="number" name="n" required>
-            <button type="submit">Calculate</button>
-        </form>
-        <div id="factorial-result" class="result-card"></div>
+    <div class="cards">
+        <div class="operation-card">
+            <form id="pow-form">
+                <h3>Power Function</h3>
+                Base: <input type="number" name="base" step="any" required>
+                Exponent: <input type="number" name="exponent" step="any" required>
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="pow-result" class="result-card">
+                <p>Result: <span id="pow-result-value"></span></p>
+                <p>Execution Time: <span id="pow-execution-time"></span> ms</p>
+                <p>Cached: <span id="pow-cached"></span></p>
+            </div>
+        </div>
+        <div class="operation-card">
+            <form id="fibonacci-form">
+                <h3>Fibonacci</h3>
+                N: <input type="number" name="n" required>
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="fibonacci-result" class="result-card">
+                <p>Result: <span id="fibonacci-result-value"></span></p>
+                <p>Execution Time: <span id="fibonacci-execution-time"></span> ms</p>
+                <p>Cached: <span id="fibonacci-cached"></span></p>
+            </div>
+        </div>
+        <div class="operation-card">
+            <form id="factorial-form">
+                <h3>Factorial</h3>
+                N: <input type="number" name="n" required>
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="factorial-result" class="result-card">
+                <p>Result: <span id="factorial-result-value"></span></p>
+                <p>Execution Time: <span id="factorial-execution-time"></span> ms</p>
+                <p>Cached: <span id="factorial-cached"></span></p>
+            </div>
+        </div>
     </div>
     <script src="/static/scripts.js"></script>
 </body>
+
 </html>

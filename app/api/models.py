@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Union
 
 class PowerRequest(BaseModel):
     base: float
@@ -11,4 +12,6 @@ class FactorialRequest(BaseModel):
     n: int
 
 class ResponseModel(BaseModel):
-    result: float
+    result: Union[float, int]
+    execution_time: float = None
+    cached: bool = False
