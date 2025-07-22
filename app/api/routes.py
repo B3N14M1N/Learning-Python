@@ -1,14 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from app.services.math_operations import calculate_power, calculate_fibonacci, calculate_factorial
-from app.api.models import PowerRequest, FibonacciRequest, FactorialRequest, ResponseModel
+from app.api.models import PowerRequest, FibonacciRequest, FactorialRequest
 
 router = APIRouter()
 
 @router.get("/pow")
 async def power(base: float, exponent: float):
     try:
-        request = PowerRequest(base=base, exponent=exponent)
-        result = await calculate_power(request)
+        result = await calculate_power(PowerRequest(base=base, exponent=exponent))
         return {
             "result": result.result,
             "execution_time": result.execution_time,
