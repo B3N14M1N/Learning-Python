@@ -23,12 +23,19 @@ const memes = [
   //11.  "26401692": 3,  // Confused Math Man
   `<div class="tenor-gif-embed" data-postid="26401692" data-share-method="host" data-aspect-ratio="1.0" data-width="100%"><a href="https://tenor.com/view/confused-confused-math-gif-26401692">Confused Confused Math GIF</a>from <a href="https://tenor.com/search/confused-gifs">Confused GIFs</a></div>`,
   //12.  "13408391465163304912": 2.6 //Doug Maclean Nhl
-  `<div class="tenor-gif-embed" data-postid="13408391465163304912" data-share-method="host" data-aspect-ratio="1.33155" data-width="100%"><a href="https://tenor.com/view/doug-maclean-nhl-hockey-stats-statistics-gif-13408391465163304912">Doug Maclean Nhl GIF</a>from <a href="https://tenor.com/search/doug+maclean-gifs">Doug Maclean GIFs</a></div>`
+  `<div class="tenor-gif-embed" data-postid="13408391465163304912" data-share-method="host" data-aspect-ratio="1.33155" data-width="100%"><a href="https://tenor.com/view/doug-maclean-nhl-hockey-stats-statistics-gif-13408391465163304912">Doug Maclean Nhl GIF</a>from <a href="https://tenor.com/search/doug+maclean-gifs">Doug Maclean GIFs</a></div>`,
+  //13.  "18378041742925308956": 3 // Npc Npc Processing
+  `<div class="tenor-gif-embed" data-postid="18378041742925308956" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/npc-npc-processing-processing-npc-processing-npc-thinking-gif-18378041742925308956">Npc Npc Processing GIF</a>from <a href="https://tenor.com/search/npc-gifs">Npc GIFs</a></div>`,
+  //14.  "15998890518868051377": 4 // Dog Doggo
+  `<div class="tenor-gif-embed" data-postid="15998890518868051377" data-share-method="host" data-aspect-ratio="1.58599" data-width="100%"><a href="https://tenor.com/view/dog-doggo-cute-math-formulas-gif-15998890518868051377">Dog Doggo GIF</a>from <a href="https://tenor.com/search/dog-gifs">Dog GIFs</a></div>`,
+  //15.  "5071382239627877340": 3 // Confused Adding
+  `<div class="tenor-gif-embed" data-postid="5071382239627877340" data-share-method="host" data-aspect-ratio="1.76596" data-width="100%"><a href="https://tenor.com/view/confused-adding-gif-5071382239627877340">Confused Adding GIF</a>from <a href="https://tenor.com/search/confused-gifs">Confused GIFs</a></div>`,
+  //16.  "23861830": 7 // What Do You Call Guys
+  `<div class="tenor-gif-embed" data-postid="23861830" data-share-method="host" data-aspect-ratio="0.834375" data-width="100%"><a href="https://tenor.com/view/what-do-you-call-guys-gif-23861830">What Do GIF</a>from <a href="https://tenor.com/search/what-gifs">What GIFs</a></div>`
 ];
 
 // Approximate GIF durations in seconds (based on typical lengths)
 const memeDurations = {
-  // Original memes
   "7714714": 3.5,  // Monkey Calculate
   "6237717": 4,  // Math Calculate
   "16142281": 3.5,   // Osita
@@ -40,7 +47,11 @@ const memeDurations = {
   "14678592": 3,   // Confused Computing
   "13385485103134761656": 3, // Cat Math 1
   "26401692": 3,  // Confused Math Man
-  "13408391465163304912": 2.6 //Doug Maclean Nhl
+  "13408391465163304912": 3, // Doug Maclean Nhl
+  "18378041742925308956": 3, // Npc Npc Processing
+  "15998890518868051377": 4, // Dog Doggo
+  "5071382239627877340": 3, // Confused Adding
+  "23861830": 7 // What Do You Call Guys
 };
 
 // Get random meme if toggle is enabled
