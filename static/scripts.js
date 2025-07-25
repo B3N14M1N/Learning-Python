@@ -102,9 +102,12 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
     // Disable button
     btn.disabled = true;
     btn.textContent = 'Calculating...';
+    
+    // Clear previous results and hide the result div
     document.getElementById(`${resultIdPrefix}-result-value`).innerText = "";
     document.getElementById(`${resultIdPrefix}-execution-time`).innerText = "";
     document.getElementById(`${resultIdPrefix}-cached`).innerText = "";
+    document.getElementById(`${resultIdPrefix}-result`).style.display = "none";
     
     // Show random meme if enabled
     const memeContainerId = getMemeContainerId(resultIdPrefix);
@@ -183,14 +186,17 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
             await new Promise(resolve => setTimeout(resolve, displayDuration));
         }
 
-        // Clear meme and show result
+        // Clear meme and hide it
         if (memeContainer) {
             memeContainer.innerHTML = '';
+            memeContainer.style.display = 'none';
         }
         
+        // Update result values and show the result div
         document.getElementById(`${resultIdPrefix}-result-value`).innerText = data.result || "";
         document.getElementById(`${resultIdPrefix}-execution-time`).innerText = data.execution_time || "";
         document.getElementById(`${resultIdPrefix}-cached`).innerText = data.cached !== undefined ? data.cached : "";
+        document.getElementById(`${resultIdPrefix}-result`).style.display = "block";
         
     } catch (error) {
         // If memes are enabled, still wait for the appropriate duration before showing error
@@ -211,6 +217,7 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
         
         if (memeContainer) {
             memeContainer.innerHTML = '';
+            memeContainer.style.display = 'none';
         }
         showErrorNotification(error.message);
     } finally {
