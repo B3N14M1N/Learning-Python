@@ -1,45 +1,46 @@
 // List of meme embed snippets with full HTML
 const memes = [
-  // Original memes
+  //1.  "7714714": 3.5,  // Monkey Calculate
   `<div class="tenor-gif-embed" data-postid="7714714" data-share-method="host" data-aspect-ratio="1.315" data-width="100%"><a href="https://tenor.com/view/monkey-calculate-silly-count-gif-7714714">Monkey Calculate GIF</a>from <a href="https://tenor.com/search/monkey-gifs">Monkey GIFs</a></div>`,
+  //2.  "6237717": 4,  // Math Calculate
   `<div class="tenor-gif-embed" data-postid="6237717" data-share-method="host" data-aspect-ratio="1.52381" data-width="100%"><a href="https://tenor.com/view/math-calculate-confusing-figure-out-gif-6237717">Math Calculate GIF</a>from <a href="https://tenor.com/search/math-gifs">Math GIFs</a></div>`,
+  //3.  "16142281": 3.5,   // Osita
   `<div class="tenor-gif-embed" data-postid="16142281" data-share-method="host" data-aspect-ratio="1.47465" data-width="100%"><a href="https://tenor.com/view/osita-osita-iheme-nigerian-nollywood-calculating-gif-16142281">Osita Osita Iheme GIF</a>from <a href="https://tenor.com/search/osita-gifs">Osita GIFs</a></div>`,
+  //4.  "4844993792848328791": 2.5, // Fred Flintstone
   `<div class="tenor-gif-embed" data-postid="4844993792848328791" data-share-method="host" data-aspect-ratio="1.27041" data-width="100%"><a href="https://tenor.com/view/fred-flintstone-abacus-the-flintstones-bookkeeping-calculation-gif-4844993792848328791">Fred Flintstone Abacus GIF</a>from <a href="https://tenor.com/search/fred+flintstone-gifs">Fred Flintstone GIFs</a></div>`,
+  //5.  "19737617": 3,   // Math Calculating Formulas
   `<div class="tenor-gif-embed" data-postid="19737617" data-share-method="host" data-aspect-ratio="1.33891" data-width="100%"><a href="https://tenor.com/view/math-calculating-formulas-confused-little-girl-gif-19737617">Math Calculating GIF</a>from <a href="https://tenor.com/search/math-gifs">Math GIFs</a></div>`,
+  //6.  "15298739": 5, // Nollywood Thinking
   `<div class="tenor-gif-embed" data-postid="15298739" data-share-method="host" data-aspect-ratio="1.22605" data-width="100%"><a href="https://tenor.com/view/nollywood-thinking-conclusion-confused-look-gif-15298739">Nollywood Thinking GIF</a>from <a href="https://tenor.com/search/nollywood-gifs">Nollywood GIFs</a></div>`,
+  //7.  "26041269": 3,   // Calculation Cat
   `<div class="tenor-gif-embed" data-postid="26041269" data-share-method="host" data-aspect-ratio="0.7875" data-width="100%"><a href="https://tenor.com/view/calculation-cat-gif-26041269">Calculation Cat GIF</a>from <a href="https://tenor.com/search/calculation+cat-gifs">Calculation Cat GIFs</a></div>`,
-  
-  // New math calculation memes (with verified working IDs)
+  //8.  "5120792": 3.5,  // Math Zack Galifianakis
   `<div class="tenor-gif-embed" data-postid="5120792" data-share-method="host" data-aspect-ratio="1.33" data-width="100%"><a href="https://tenor.com/view/math-zack-galifianakis-thinking-calculating-gif-5120792">Math Zack Galifianakis GIF</a>from <a href="https://tenor.com/search/math-gifs">Math GIFs</a></div>`,
+  //9.  "14678592": 3,   // Confused Computing
   `<div class="tenor-gif-embed" data-postid="14678592" data-share-method="host" data-aspect-ratio="1.42" data-width="100%"><a href="https://tenor.com/view/confused-computing-counting-math-problems-gif-14678592">Confused Computing GIF</a>from <a href="https://tenor.com/search/confused-gifs">Confused GIFs</a></div>`,
-  `<div class="tenor-gif-embed" data-postid="18870260" data-share-method="host" data-aspect-ratio="1.78" data-width="100%"><a href="https://tenor.com/view/calculista-gif-18870260">Calculista GIF</a>from <a href="https://tenor.com/search/math-gifs">Math GIFs</a></div>`,
+  //10.  "13385485103134761656": 3, // Cat Math 1
   `<div class="tenor-gif-embed" data-postid="13385485103134761656" data-share-method="host" data-aspect-ratio="1.0" data-width="100%"><a href="https://tenor.com/view/cat-cat-math-math-cat-numbers-cat-funny-gif-13385485103134761656">Cat Cat Math GIF</a>from <a href="https://tenor.com/search/cat-gifs">Cat GIFs</a></div>`,
-  `<div class="tenor-gif-embed" data-postid="14841107" data-share-method="host" data-aspect-ratio="1.77" data-width="100%"><a href="https://tenor.com/view/confused-wtf-math-what-numbers-gif-14841107">Confused WTF GIF</a>from <a href="https://tenor.com/search/confused-gifs">Confused GIFs</a></div>`,
+  //11.  "26401692": 3,  // Confused Math Man
   `<div class="tenor-gif-embed" data-postid="26401692" data-share-method="host" data-aspect-ratio="1.0" data-width="100%"><a href="https://tenor.com/view/confused-confused-math-gif-26401692">Confused Confused Math GIF</a>from <a href="https://tenor.com/search/confused-gifs">Confused GIFs</a></div>`,
-  `<div class="tenor-gif-embed" data-postid="16949472" data-share-method="host" data-aspect-ratio="1.0" data-width="100%"><a href="https://tenor.com/view/thinking-gif-hmmm-calculate-gif-16949472">Thinking GIF GIF</a>from <a href="https://tenor.com/search/thinking-gifs">Thinking GIFs</a></div>`,
-  `<div class="tenor-gif-embed" data-postid="10615376958285621529" data-share-method="host" data-aspect-ratio="1.0" data-width="100%"><a href="https://tenor.com/view/cat-cat-math-math-cat-numbers-cat-funny-gif-10615376958285621529">Cat Cat Math GIF</a>from <a href="https://tenor.com/search/cat-gifs">Cat GIFs</a></div>`
+  //12.  "13408391465163304912": 2.6 //Doug Maclean Nhl
+  `<div class="tenor-gif-embed" data-postid="13408391465163304912" data-share-method="host" data-aspect-ratio="1.33155" data-width="100%"><a href="https://tenor.com/view/doug-maclean-nhl-hockey-stats-statistics-gif-13408391465163304912">Doug Maclean Nhl GIF</a>from <a href="https://tenor.com/search/doug+maclean-gifs">Doug Maclean GIFs</a></div>`
 ];
 
 // Approximate GIF durations in seconds (based on typical lengths)
 const memeDurations = {
   // Original memes
   "7714714": 3.5,  // Monkey Calculate
-  "6237717": 2.5,  // Math Calculate
-  "16142281": 3,   // Osita
-  "4844993792848328791": 4, // Fred Flintstone
+  "6237717": 4,  // Math Calculate
+  "16142281": 3.5,   // Osita
+  "4844993792848328791": 2.5, // Fred Flintstone
   "19737617": 3,   // Math Calculating Formulas
-  "15298739": 2.5, // Nollywood Thinking
+  "15298739": 5, // Nollywood Thinking
   "26041269": 3,   // Calculation Cat
-  
-  // New working memes with verified IDs
   "5120792": 3.5,  // Math Zack Galifianakis
   "14678592": 3,   // Confused Computing
-  "18870260": 4,   // Calculista (woman crying at math)
   "13385485103134761656": 3, // Cat Math 1
-  "14841107": 3.5,  // Confused WTF Math
-  "26401692": 2.5,  // Confused Math Man
-  "16949472": 3,    // Thinking Calculate Kid
-  "10615376958285621529": 3 // Cat Math 2
+  "26401692": 3,  // Confused Math Man
+  "13408391465163304912": 2.6 //Doug Maclean Nhl
 };
 
 // Get random meme if toggle is enabled
