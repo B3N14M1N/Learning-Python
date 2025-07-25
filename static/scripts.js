@@ -51,23 +51,18 @@ function getRandomMeme() {
 
 // Function to manually trigger Tenor embed processing
 function processTenorEmbeds() {
-  console.log("Attempting to process Tenor embeds manually");
-  
   // Use setTimeout to ensure this runs after the current execution context
   setTimeout(() => {
     // Method 1: Try using the global object if available
     if (window.TenorEmbedObject) {
-      console.log("Using TenorEmbedObject.process()");
       window.TenorEmbedObject.process();
       return true;
     }
     
     // Method 2: Dispatch a resize event which often triggers embed libraries to reprocess
-    console.log("Dispatching resize event to trigger embeds");
     window.dispatchEvent(new Event('resize'));
     
     // Method 3: Reload the Tenor script
-    console.log("Reloading Tenor script");
     const newScript = document.createElement('script');
     newScript.async = true;
     newScript.src = 'https://tenor.com/embed.js';
@@ -97,7 +92,6 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
     
     // Check if memes are enabled
     const memesEnabled = document.getElementById('toggle-memes').checked;
-    console.log(`Form submitted for ${resultIdPrefix}, memes enabled: ${memesEnabled}`);
     
     // Disable button
     btn.disabled = true;
@@ -115,11 +109,8 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
     let memeHtml = '';
     
     if (memesEnabled && memeContainer) {
-        console.log(`Showing meme in container: ${memeContainerId}`);
         memeHtml = getRandomMeme();
         if (memeHtml) {
-            console.log('Got random meme HTML:', memeHtml.substring(0, 50) + '...');
-            
             // Clear and prepare the container
             memeContainer.style.display = 'block'; 
             memeContainer.style.minHeight = '200px';
@@ -149,15 +140,12 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
                 
                 // Determine display duration (minimum 3.5 seconds, or use predefined duration if available)
                 const displayDuration = (memeDurations[postId] || 3.5) * 1000;
-                console.log(`Using display duration: ${displayDuration}ms for meme ID: ${postId}`);
                 
                 // Process the embed with our helper function
                 processTenorEmbeds();
                 
                 // Try again after a longer delay as backup
                 setTimeout(processTenorEmbeds, 500);
-                
-                console.log('Meme HTML inserted and processing triggered');
             }, 50);
         }
     }
@@ -181,7 +169,6 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
             
             // Determine display duration (minimum 3.5 seconds, or use predefined duration if available)
             const displayDuration = (memeDurations[postId] || 3.5) * 1000;
-            console.log(`Waiting ${displayDuration}ms for meme display`);
             
             await new Promise(resolve => setTimeout(resolve, displayDuration));
         }
@@ -210,7 +197,6 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
             
             // Determine display duration
             const displayDuration = (memeDurations[postId] || 3.5) * 1000;
-            console.log(`Waiting ${displayDuration}ms for meme display before showing error`);
             
             await new Promise(resolve => setTimeout(resolve, displayDuration));
         }
@@ -229,21 +215,12 @@ async function handleFormSubmit(event, url, resultIdPrefix) {
 
 // Add event listeners when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, setting up debug meme and toggle');
-    
-    // Check for Tenor script and report status
-    if (window.TenorEmbedObject) {
-        console.log('✅ Tenor script already loaded at DOM Content Loaded');
-    } else {
-        console.log('⚠️ Tenor script not loaded yet at DOM Content Loaded');
-    }
     
     // Restore toggle state from localStorage
     const toggle = document.getElementById('toggle-memes');
     const savedState = localStorage.getItem('memes-enabled');
     if (savedState !== null) {
         toggle.checked = savedState === 'true';
-        console.log(`Restored meme toggle state: ${toggle.checked}`);
     }
     
     // Setup all meme containers to ensure proper styling
@@ -253,95 +230,19 @@ document.addEventListener('DOMContentLoaded', function() {
         container.style.marginBottom = '15px';
     });
     
-    // Debug: Test the toggle switch with a simple fallback
-    const debugMemeContent = document.getElementById('debug-meme-content');
-    
-    function updateDebugMeme() {
-        console.log('updateDebugMeme called, toggle checked:', toggle.checked);
-        
-        // Save toggle state
-        localStorage.setItem('memes-enabled', toggle.checked.toString());
-        
-        if (toggle.checked) {
-            // Just show a simple status indicator without the actual meme
-            debugMemeContent.innerHTML = `
-                <div style="border: 2px solid green; padding: 10px; margin: 10px;">
-                    <p><strong>✅ MEMES ENABLED</strong></p>
-                    <p>Memes will show during calculations</p>
-                    <button id="test-meme-btn" class="btn btn-sm btn-primary">Test Meme (3.5s)</button>
-                </div>
-            `;
-            
-            // Add a test button event listener
-            setTimeout(() => {
-                const testBtn = document.getElementById('test-meme-btn');
-                if (testBtn) {
-                    testBtn.addEventListener('click', function() {
-                        // Show a quick test meme that disappears after the duration
-                        this.disabled = true;
-                        this.textContent = 'Loading...';
-                        
-                        // Show random meme
-                        const randomMeme = getRandomMeme();
-                        const testArea = document.createElement('div');
-                        testArea.style.marginTop = '10px';
-                        testArea.innerHTML = randomMeme;
-                        
-                        // Get the post ID for duration info
-                        let postId = '';
-                        const postIdMatch = randomMeme.match(/data-postid="([^"]+)"/);
-                        if (postIdMatch && postIdMatch[1]) {
-                            postId = postIdMatch[1];
-                        }
-                        
-                        // Determine display duration
-                        const displayDuration = (memeDurations[postId] || 3.5) * 1000;
-                        
-                        // Add to the debug area
-                        debugMemeContent.querySelector('div').appendChild(testArea);
-                        
-                        // Process the embed
-                        processTenorEmbeds();
-                        setTimeout(processTenorEmbeds, 300);
-                        
-                        // Remove after duration
-                        setTimeout(() => {
-                            if (testArea.parentNode) {
-                                testArea.parentNode.removeChild(testArea);
-                            }
-                            testBtn.disabled = false;
-                            testBtn.textContent = 'Test Meme (3.5s)';
-                        }, displayDuration);
-                    });
-                }
-            }, 100);
-        } else {
-            debugMemeContent.innerHTML = `
-                <div style="border: 2px solid red; padding: 10px; margin: 10px;">
-                    <p><strong>❌ MEMES DISABLED</strong></p>
-                    <p>Toggle is OFF - no memes will show</p>
-                </div>
-            `;
-        }
-    }
-    
-    // Initial load
-    console.log('Setting up initial debug meme');
-    updateDebugMeme();
+    // Save toggle state
+    localStorage.setItem('memes-enabled', toggle.checked.toString());
     
     // Listen for toggle changes
     if (toggle) {
         toggle.addEventListener('change', function(e) {
-            console.log('Toggle changed! New state:', e.target.checked);
-            updateDebugMeme();
+            localStorage.setItem('memes-enabled', e.target.checked.toString());
         });
-        console.log('Toggle event listener added');
     } else {
         console.error('Toggle element not found!');
     }
 
     // Main form event listeners
-    console.log('Setting up form event listeners');
     document.getElementById('pow-form').addEventListener('submit', (event) => handleFormSubmit(event, '/pow', 'pow'));
     document.getElementById('fibonacci-form').addEventListener('submit', (event) => handleFormSubmit(event, '/fibonacci', 'fibonacci'));
     document.getElementById('factorial-form').addEventListener('submit', (event) => handleFormSubmit(event, '/factorial', 'factorial'));
