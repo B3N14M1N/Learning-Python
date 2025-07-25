@@ -1,96 +1,111 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
     color: #333;
 }
 
-h1 {
-    text-align: center;
-    margin-top: 20px;
-}
-
-form {
-    display: flex;
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 400px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-}
-
-form h3 {
-    margin-bottom: 10px;
-}
-
-form input, form button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-form button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: #0056b3;
-}
-
-.cards {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
+/* Modern card styling for operation cards */
 .operation-card {
-    margin: 40px;
-    padding: 20px;
-    max-width: 400px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* .result-card {
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 400px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-} */
-
-.error-notification {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 15px;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.error-notification button {
-    background: none;
     border: none;
-    color: #721c24;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.operation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Form styling within operation cards */
+.operation-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.operation-card .card-title {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+/* Custom button styling to enhance Bootstrap */
+.operation-card .btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.operation-card .btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.operation-card .btn-primary:disabled {
+    background: #6c757d;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Form inputs styling */
+.operation-card .form-control {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.operation-card .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+}
+
+/* Result alert styling */
+.operation-card .alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Meme container styling */
+.operation-card [id$="-meme"] {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    /*min-height: 200px; /* Increased height for better visibility */
+    display: block; /* Changed to block for better tenor embed compatibility */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative; /* For absolute positioning of loading indicator if needed */
+}
+
+/* Tenor embed specific styling */
+.tenor-gif-embed {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Toggle switch styling */
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Header styling */
+h1.h3 {
+    color: #495057;
+    font-weight: 700;
+}
+
+/* Error notification - keep original functionality but modernize */
+.alert-danger.position-fixed {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 16px rgba(220, 53, 69, 0.2);
 }
