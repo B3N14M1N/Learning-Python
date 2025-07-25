@@ -54,11 +54,28 @@ const memeDurations = {
   "23861830": 7 // What Do You Call Guys
 };
 
-// Get random meme if toggle is enabled
+// Get random meme if toggle is enabled, avoid showing the same meme within last 3 tries (unless memes.length < 3)
+const recentMemes = [];
 function getRandomMeme() {
-  const toggle = document.getElementById('toggle-memes');
-  if (!toggle || !toggle.checked) return '';
-  return memes[Math.floor(Math.random() * memes.length)];
+    const toggle = document.getElementById('toggle-memes');
+    if (!toggle || !toggle.checked) return '';
+    if (memes.length < 3) {
+        // If less than 3 memes, allow repeats
+        const idx = Math.floor(Math.random() * memes.length);
+        recentMemes.push(idx);
+        if (recentMemes.length > 3) recentMemes.shift();
+        return memes[idx];
+    }
+    // Filter out recently shown memes
+    const available = memes
+        .map((meme, idx) => idx)
+        .filter(idx => !recentMemes.includes(idx));
+    // If all memes are in recentMemes, reset history
+    const pool = available.length > 0 ? available : memes.map((_, idx) => idx);
+    const idx = pool[Math.floor(Math.random() * pool.length)];
+    recentMemes.push(idx);
+    if (recentMemes.length > 3) recentMemes.shift();
+    return memes[idx];
 }
 
 // Function to manually trigger Tenor embed processing
