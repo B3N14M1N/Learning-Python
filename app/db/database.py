@@ -1,8 +1,9 @@
-import asyncio
-from pathlib import Path
-from dotenv import load_dotenv
 import os
+from pathlib import Path
+
 import aiosqlite
+from dotenv import load_dotenv
+
 
 # Database connector and handler for SQLite using aiosqlite
 class DatabaseConnector:
@@ -34,6 +35,7 @@ class DatabaseConnector:
             )
             await conn.commit()
 
+
 # Database handler for caching results
 class DatabaseHandler:
     def __init__(self, db_connector: DatabaseConnector):
@@ -56,5 +58,8 @@ class DatabaseHandler:
             row = await cursor.fetchone()
             return row[0] if row else None
 
+
 db_connector = DatabaseConnector()
+
+
 db_handler = DatabaseHandler(db_connector)
